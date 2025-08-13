@@ -161,6 +161,7 @@ func TestGet(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			client := newMockClient(tt.responses)
 			cache := NewCache(client)
+			defer cache.Close()
 			for i, req := range tt.requests {
 				resp, err := cache.Get(req)
 				if err != tt.results[i].err {
@@ -173,4 +174,3 @@ func TestGet(t *testing.T) {
 		})
 	}
 }
-
